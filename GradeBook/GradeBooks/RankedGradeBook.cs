@@ -33,7 +33,7 @@ namespace GradeBook.GradeBooks
                 }                
                 
             }
-
+            
 
             if (BetterThan >= 0.8*CountedStudents)
                 return 'A';
