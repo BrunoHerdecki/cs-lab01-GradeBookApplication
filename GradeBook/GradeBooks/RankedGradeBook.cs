@@ -22,26 +22,26 @@ namespace GradeBook.GradeBooks
             {
                 throw new InvalidOperationException(" ");
             }
-            int CountedStudents = Students.Count;
-            double BetterThan = 0;
+            int BetterThan = 0;
             
            foreach (var student in Students)
             {
-                if(student.AverageGrade > averageGrade)
+                if(averageGrade > student.AverageGrade)
                 {
                     BetterThan++;
-                }                
+                }        
+               
                 
             }
             
 
-            if (BetterThan >= 0.8*CountedStudents)
+            if (BetterThan >= 0.8*Students.Count)
                 return 'A';
-            else if (BetterThan >= 0.6* CountedStudents)
+            else if (BetterThan >= 0.6* Students.Count)
                 return 'B';
-            else if (BetterThan >= 0.4 * CountedStudents)
+            else if (BetterThan >= 0.4 * Students.Count)
                 return 'C';
-            else if (BetterThan >= 0.2 * CountedStudents)
+            else if (BetterThan >= 0.2 * Students.Count)
                 return 'D';
             else
                 return 'F';            
