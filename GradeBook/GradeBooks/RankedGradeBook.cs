@@ -16,25 +16,20 @@ namespace GradeBook.GradeBooks
             
         }
         public override char GetLetterGrade(double averageGrade)
-        {
-            
+        {           
             if (Students.Count < 5)
             {
                 throw new InvalidOperationException(" ");
             }
             int CountedStudents = Students.Count;
-            double BetterThan = 0;
-            
+            double BetterThan = 0;            
            foreach (var student in Students)
             {
                 if(student.AverageGrade > averageGrade)
                 {
                     BetterThan++;
-                }                
-                
+                }                                
             }
-
-
             if (BetterThan >= 0.8*CountedStudents)
                 return 'A';
             else if (BetterThan >= 0.6* CountedStudents)
@@ -46,8 +41,20 @@ namespace GradeBook.GradeBooks
             else
                 return 'F';            
         }
+        public override void CalculateStatistics()
+        {
+            
+            if(Students.Count<5)
+            {
+                Console.WriteLine("Ranked grading requires at least 5 students.");
+            }
+            if (Students.Count >= 5)
+            {
+                base.CalculateStatistics();
+            }
+        }
 
-        
+
     }
    
 }
