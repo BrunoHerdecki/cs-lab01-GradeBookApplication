@@ -10,7 +10,7 @@ namespace GradeBook.GradeBooks
 {
     public class RankedGradeBook : BaseGradeBook
     {
-        public RankedGradeBook(string name) : base(name)
+        public RankedGradeBook(string name, bool isWeighted) : base(name, isWeighted)
         {
             Type = GradeBookType.Ranked;
 
@@ -34,7 +34,6 @@ namespace GradeBook.GradeBooks
 
             }
 
-
             if (BetterThan >= 0.8 * Students.Count)
                 return 'A';
             else if (BetterThan >= 0.6 * Students.Count)
@@ -50,13 +49,17 @@ namespace GradeBook.GradeBooks
         {
 
             if (Students.Count < 5)
-            {
                 Console.WriteLine("Ranked grading requires at least 5 students.");
-            }
-            if (Students.Count >= 5)
-            {
+            else
                 base.CalculateStatistics();
-            }
+
+        }
+        public override void CalculateStudentStatistics(string name)
+        {
+            if (Students.Count < 5)
+                Console.WriteLine("Ranked grading requires at least 5 students.");
+            else
+                base.CalculateStudentStatistics(name);
         }
 
     }

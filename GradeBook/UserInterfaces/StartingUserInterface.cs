@@ -31,34 +31,37 @@ namespace GradeBook.UserInterfaces
                 Console.WriteLine("{0} was not recognized, please try again.", command);
         }
 
-        public static void CreateCommand(string command)
+        public static BaseGradeBook CreateCommand(string command)
         {
             var parts = command.Split(' ');
-            var name = parts[2];
-            if (parts.Length != 3)
+            var name = parts[1];
+
+            if (parts.Length != 4)
             {
-                Console.WriteLine("Command not valid, Create requires a name and type of gradebook.");
-                
+                Console.WriteLine("Command not valid, Create requires a name, type of gradebook, if it's weighted (true / false).");
             }
-            if(parts[2]=="standard")
+            bool isWeighted = false;
+            if (parts.Length == 4)
+                isWeighted = Convert.ToBoolean(parts[3]);
+            if (parts[2] == "standard")
             {
-                 BaseGradeBook gradeBook = new StandardGradeBook(name);
+                Console.WriteLine("standard");
+                return new StandardGradeBook(name, isWeighted);
+
             }
             else if (parts[2] == "ranked")
             {
-                BaseGradeBook gradeBook = new RankedGradeBook(name);
+                Console.WriteLine("ranked");
+                return new RankedGradeBook(name, isWeighted);
             }
             else
             {
-                Console.WriteLine(" is not a supported type of gradebook, please try again");
-                return;
+                Console.WriteLine($"{parts[2]} is not a supported type of gradebook, please try again");
+                throw new InvalidOperationException();
+
             }
-           
-            /*
-            BaseGradeBook gradeBook = new BaseGradeBook(name);
-            Console.WriteLine("Created gradebook {0}.", name);
-            GradeBookUserInterface.CommandLoop(gradeBook);
-           */
+
+
         }
 
         public static void LoadCommand(string command)
@@ -83,7 +86,7 @@ namespace GradeBook.UserInterfaces
             Console.WriteLine();
             Console.WriteLine("GradeBook accepts the following commands:");
             Console.WriteLine();
-            Console.WriteLine("Create 'Name' 'Type' - Creates a new gradebook where 'Name' is the name of the gradebook and 'Type' is what type of grading it should use.");
+            Console.WriteLine("Create 'Name' 'Type' 'Weighted' - Creates a new gradebook where 'Name' is the name of the gradebook, 'Type' is what type of grading it should use, and 'Weighted' is whether or not grades should be weighted (true or false).");
             Console.WriteLine();
             Console.WriteLine("Load 'Name' - Loads the gradebook with the provided 'Name'.");
             Console.WriteLine();
