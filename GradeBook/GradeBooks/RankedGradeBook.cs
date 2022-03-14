@@ -13,38 +13,38 @@ namespace GradeBook.GradeBooks
         public RankedGradeBook(string name) : base(name)
         {
             Type = GradeBookType.Ranked;
-            
+
         }
         public override char GetLetterGrade(double averageGrade)
         {
-            
+
             if (Students.Count < 5)
             {
                 throw new InvalidOperationException(" ");
             }
             int BetterThan = 0;
-            
-           foreach (var student in Students)
+
+            foreach (var student in Students)
             {
-                if(averageGrade > student.AverageGrade)
+                if (averageGrade > student.AverageGrade)
                 {
                     BetterThan++;
-                }        
-               
-                
-            }
-            
+                }
 
-            if (BetterThan >= 0.8*Students.Count)
+
+            }
+
+
+            if (BetterThan >= 0.8 * Students.Count)
                 return 'A';
-            else if (BetterThan >= 0.6* Students.Count)
+            else if (BetterThan >= 0.6 * Students.Count)
                 return 'B';
             else if (BetterThan >= 0.4 * Students.Count)
                 return 'C';
             else if (BetterThan >= 0.2 * Students.Count)
                 return 'D';
             else
-                return 'F';            
+                return 'F';
         }
         public override void CalculateStatistics()
         {
@@ -60,6 +60,6 @@ namespace GradeBook.GradeBooks
         }
 
     }
-   
+
 }
 
